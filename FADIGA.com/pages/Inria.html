@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<title>Portfolio - Bafodé FADIGA</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link href="../layout/styles/layout.css" rel="stylesheet" type="text/css" media="all">
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+<style>
+.bgded.overlay::before {
+  background-color: rgba(0, 0, 0, 0.15);
+}
+.bgded.overlay {
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  filter: brightness(1.2) contrast(1.2) saturate(1.1);
+  position: relative;
+  overflow: hidden;
+}
+.typed-cursor {
+  color: #ff0000 !important;
+}
+#pageintro {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 700px;
+  text-align: center;
+}
+#pageintro .heading {
+  color: white;
+  font-size: 4rem;
+  font-family: "Arial Black", "Arial Bold", sans-serif;
+  font-weight: 700;
+}
+
+.firework {
+  position: absolute;
+  pointer-events: none;
+  animation: explode 1s ease-out forwards;
+}
+
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  animation: spread 0.8s ease-out forwards, fade 0.8s ease-out forwards;
+}
+
+.spark {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: white;
+  border-radius: 50%;
+  animation: spark 0.5s ease-out forwards;
+  opacity: 0.8;
+}
+
+@keyframes explode {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+@keyframes spread {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  100% {
+    transform: translate(var(--x), var(--y)) scale(0);
+  }
+}
+
+@keyframes fade {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@keyframes spark {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--sx), var(--sy)) scale(0);
+    opacity: 0;
+  }
+}
+</style>
+</head>
+<body id="top">
+<div class="bgded overlay" style="background-image:url('../images/demo/backgrounds/inria.jpg'); min-height: 800px;" id="bgContainer"> 
+  <div class="wrapper row1">
+    <header id="header" class="hoc clear">
+      <div id="logo" class="fl_left" style="padding-left: 0; margin-left: 0;"> 
+        <h1 style="margin-left: 0;"><a href="../index.html" style="padding-left: 0;">FADIGA.COM</a></h1>
+      </div>
+      <nav id="mainav" class="fl_right"> 
+        <ul class="clear">
+          <li><a href="../index.html">Home</a></li>
+          <li class="active"><a href="Inria.html">INRIA</a></li>
+        </ul>
+      </nav>
+    </header>
+  </div>
+  <div id="pageintro" class="hoc clear"> 
+    <article>
+      <h3 class="heading"><span id="typed-text"></span></h3>
+      <script>
+        var typed = new Typed('#typed-text', {
+          strings: ['Présentation de mon entreprise'],
+          typeSpeed: 50,
+          backSpeed: 0,
+          loop: false,
+          showCursor: true,
+          cursorChar: '|',
+          cursorColor: '#ff0000'
+        });
+      </script>
+    </article>
+  </div>
+</div>
+
+<div class="wrapper row3">
+  <main class="hoc container clear"> 
+    <div class="content"> 
+      <div class="sectiontitle" style="margin-bottom: 30px;">
+        <p class="heading underline font-x2">Présentation INRIA</p>
+      </div>
+      <div style="text-align: justify; line-height: 1.6;">
+        <h3>Mon expérience chez INRIA</h3>
+        <p>En tant qu'ingénieur support à INRIA, j'ai eu l'opportunité de travailler sur divers projets et d'acquérir une expérience précieuse dans le domaine de l'informatique et du support technique.</p>
+        
+        <h3>Missions et responsabilités</h3>
+        <p>Dans le cadre de mes fonctions, je suis amené à :</p>
+        <ul style="list-style-type: disc; margin-left: 20px; margin-bottom: 20px;">
+          <li>Gérer et maintenir les systèmes informatiques</li>
+          <li>Assurer le support technique auprès des utilisateurs</li>
+          <li>Participer à l'amélioration continue des services</li>
+        </ul>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div class="wrapper row5">
+  <div id="copyright" class="hoc clear"> 
+    <p class="fl_left">Copyright &copy; 2024 - All Rights Reserved - <a href="#">Bafodé FADIGA</a></p>
+    <p class="fl_right">Portfolio BTS SIO</p>
+  </div>
+</div>
+
+<script src="../layout/scripts/jquery.min.js"></script>
+<script src="../layout/scripts/jquery.backtotop.js"></script>
+<script src="../layout/scripts/jquery.mobilemenu.js"></script>
+<script>
+  // Simplified Firework effect
+  document.getElementById('bgContainer').addEventListener('click', function(e) {
+    const container = this.getBoundingClientRect();
+    const x = e.clientX - container.left;
+    const y = e.clientY - container.top;
+    createFirework(x, y);
+  });
+
+  function createFirework(x, y) {
+    const firework = document.createElement('div');
+    firework.className = 'firework';
+    firework.style.left = x + 'px';
+    firework.style.top = y + 'px';
+
+    // Create particles
+    const colors = ['#ff0000', '#ffffff']; // Just red and white
+    const particleCount = 16; // Reduced number of particles
+    
+    // Main firework particles
+    for (let i = 0; i < particleCount; i++) {
+      const particle = document.createElement('div');
+      particle.className = 'particle';
+      particle.style.backgroundColor = colors[i % colors.length];
+      
+      // Calculate angle and distance
+      const angle = (i * (360 / particleCount));
+      const distance = 60 + Math.random() * 20; // Reduced spread
+      
+      // Set the particle's movement direction
+      const rad = angle * Math.PI / 180;
+      const xMove = Math.cos(rad) * distance;
+      const yMove = Math.sin(rad) * distance;
+      
+      particle.style.setProperty('--x', `${xMove}px`);
+      particle.style.setProperty('--y', `${yMove}px`);
+      
+      firework.appendChild(particle);
+    }
+
+    document.getElementById('bgContainer').appendChild(firework);
+    
+    // Remove the firework element after animation
+    setTimeout(() => {
+      firework.remove();
+    }, 1000);
+  }
+</script>
+</body>
+</html>
